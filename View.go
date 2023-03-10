@@ -19,6 +19,7 @@ type View struct {
 	pongModel *Model
 }
 
+// Blubb
 func NewView(model *Model) *View {
 	return &View{
 		pongModel: model,
