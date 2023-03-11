@@ -27,19 +27,19 @@ func (c *Controller) Update() error {
 	}
 
 	if ebiten.IsKeyPressed(ebiten.KeyW) {
-		c.pongModel.LeftPaddleUp()
+		c.pongModel.MovePaddle(true, true)
 	}
 
 	if ebiten.IsKeyPressed(ebiten.KeyS) {
-		c.pongModel.LeftPaddleDown()
+		c.pongModel.MovePaddle(false, true)
 	}
 
 	if ebiten.IsKeyPressed(ebiten.KeyI) {
-		c.pongModel.RightPaddleUp()
+		c.pongModel.MovePaddle(true, false)
 	}
 
 	if ebiten.IsKeyPressed(ebiten.KeyK) {
-		c.pongModel.RightPaddleDown()
+		c.pongModel.MovePaddle(false, false)
 	}
 
 	if err := c.pongModel.Update(); err != nil {
