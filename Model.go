@@ -1,10 +1,5 @@
 package main
 
-import (
-	"math/rand"
-	"time"
-)
-
 type Model struct {
 	LeftPaddleY  float64
 	RightPaddleY float64
@@ -21,8 +16,8 @@ func NewModel() *Model {
 		RightPaddleY: screenHeight / 2,
 		BallX:        screenWidth / 2,
 		BallY:        screenHeight / 2,
-		BallSpeedX:   5,
-		BallSpeedY:   5,
+		BallSpeedX:   ballSpeedX,
+		BallSpeedY:   ballSpeedY,
 	}
 }
 
@@ -61,11 +56,7 @@ func (m *Model) checkPaddleCollision() {
 
 func (m *Model) resetBallIfOffScreen() {
 	if m.BallX < -ballSize || m.BallX > screenWidth {
-		m.BallX = screenWidth / 2
-		m.BallY = screenHeight / 2
-		rand.Seed(time.Now().UnixNano())
-		m.BallSpeedX = 7
-		m.BallSpeedY = 7
+		*m = *NewModel()
 		m.gameStarted = false
 	}
 }
@@ -73,24 +64,24 @@ func (m *Model) resetBallIfOffScreen() {
 func (m *Model) MovePaddle(up bool, left bool) {
 	if left {
 		if up {
-			m.LeftPaddleY -= 5
+			m.LeftPaddleY -= paddleSpeed
 			if m.LeftPaddleY < 0 {
 				m.LeftPaddleY = 0
 			}
 		} else {
-			m.LeftPaddleY += 5
+			m.LeftPaddleY += paddleSpeed
 			if m.LeftPaddleY > screenHeight-paddleHeight {
 				m.LeftPaddleY = screenHeight - paddleHeight
 			}
 		}
 	} else {
 		if up {
-			m.RightPaddleY -= 5
+			m.RightPaddleY -= paddleSpeed
 			if m.RightPaddleY < 0 {
 				m.RightPaddleY = 0
 			}
 		} else {
-			m.RightPaddleY += 5
+			m.RightPaddleY += paddleSpeed
 			if m.RightPaddleY > screenHeight-paddleHeight {
 				m.RightPaddleY = screenHeight - paddleHeight
 			}

@@ -4,6 +4,7 @@ import (
 	"github.com/hajimehoshi/ebiten/v2"
 	"github.com/hajimehoshi/ebiten/v2/ebitenutil"
 	"image/color"
+	"strings"
 )
 
 type View struct {
@@ -16,14 +17,26 @@ func NewView(model *Model) *View {
 	}
 }
 
+func drawCenteredText(screen *ebiten.Image, msg string, y int) {
+	lines := strings.Split(msg, "\n")
+	maxLineWidth := 0
+	for _, line := range lines {
+		if len(line) > maxLineWidth {
+			maxLineWidth = len(line)
+		}
+	}
+	textWidth := maxLineWidth * 16
+	x := (screenWidth - textWidth) / 2
+
+	for _, line := range lines {
+		ebitenutil.DebugPrintAt(screen, line, x, y)
+		y += 16
+	}
+}
 func (v *View) Draw(screen *ebiten.Image) {
 	if !v.pongModel.gameStarted {
-		msg := "Press Enter to start"
-		textWidth := len(msg) * 16
-		x := (screenWidth - textWidth) / 2
-		y := screenHeight / 2
-
-		ebitenutil.DebugPrintAt(screen, msg, x, y)
+		msg := "Control left Paddle -> W/S\nControl right Paddle -> I/K\n\nPress Enter to start"
+		drawCenteredText(screen, msg, screenHeight/2)
 	} else {
 		ebitenutil.DrawRect(screen, 0, v.pongModel.LeftPaddleY, paddleWidth, paddleHeight, color.White)
 		ebitenutil.DrawRect(screen, screenWidth-paddleWidth, v.pongModel.RightPaddleY, paddleWidth, paddleHeight, color.White)

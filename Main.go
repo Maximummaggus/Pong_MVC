@@ -9,8 +9,11 @@ const (
 	paddleWidth  = 16
 	paddleHeight = 96
 	ballSize     = 16
-	screenWidth  = 800
-	screenHeight = 600
+	screenWidth  = 640
+	screenHeight = 480
+	ballSpeedX   = 5
+	ballSpeedY   = 5
+	paddleSpeed  = 5
 )
 
 func main() {
