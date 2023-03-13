@@ -17,7 +17,7 @@ func NewView(model *Model) *View {
 	}
 }
 
-func drawCenteredText(screen *ebiten.Image, msg string, y int) {
+func drawText(screen *ebiten.Image, msg string, y int) {
 	lines := strings.Split(msg, "\n")
 	maxLineWidth := 0
 	for _, line := range lines {
@@ -36,7 +36,7 @@ func drawCenteredText(screen *ebiten.Image, msg string, y int) {
 func (v *View) Draw(screen *ebiten.Image) {
 	if !v.pongModel.gameStarted {
 		msg := "Control left Paddle -> W/S\nControl right Paddle -> I/K\n\nPress Enter to start"
-		drawCenteredText(screen, msg, screenHeight/2)
+		drawText(screen, msg, screenHeight/2)
 	} else {
 		ebitenutil.DrawRect(screen, 0, v.pongModel.LeftPaddleY, paddleWidth, paddleHeight, color.White)
 		ebitenutil.DrawRect(screen, screenWidth-paddleWidth, v.pongModel.RightPaddleY, paddleWidth, paddleHeight, color.White)

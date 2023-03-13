@@ -28,7 +28,7 @@ func (m *Model) Update() error {
 	m.moveBall()
 	m.checkWallCollision()
 	m.checkPaddleCollision()
-	m.resetBallIfOffScreen()
+	m.resetBall()
 	return nil
 }
 
@@ -54,7 +54,7 @@ func (m *Model) checkPaddleCollision() {
 	}
 }
 
-func (m *Model) resetBallIfOffScreen() {
+func (m *Model) resetBall() {
 	if m.BallX < -ballSize || m.BallX > screenWidth {
 		*m = *NewModel()
 		m.gameStarted = false
