@@ -38,9 +38,9 @@ func (v *View) Draw(screen *ebiten.Image) {
 		msg := "Control left Paddle -> W/S\nControl right Paddle -> I/K\n\nPress Enter to start"
 		drawText(screen, msg, screenHeight/2)
 	} else {
-		ebitenutil.DrawRect(screen, 0, v.pongModel.LeftPaddleY, paddleWidth, paddleHeight, color.White)
-		ebitenutil.DrawRect(screen, screenWidth-paddleWidth, v.pongModel.RightPaddleY, paddleWidth, paddleHeight, color.White)
-		ebitenutil.DrawRect(screen, v.pongModel.BallX, v.pongModel.BallY, ballSize, ballSize, color.White)
+		ebitenutil.DrawRect(screen, 0, v.pongModel.LeftPaddleY, paddleWidth, paddleHeight, color.RGBA{255, 0, 0, 255})
+		ebitenutil.DrawRect(screen, screenWidth-paddleWidth, v.pongModel.RightPaddleY, paddleWidth, paddleHeight, color.RGBA{255, 0, 0, 255})
+		ebitenutil.DrawRect(screen, v.pongModel.BallX, v.pongModel.BallY, ballSize, ballSize, color.RGBA{0, 255, 0, 255})
 	}
 }
 
